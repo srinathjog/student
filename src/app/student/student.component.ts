@@ -16,12 +16,14 @@ export class StudentComponent implements OnInit {
 
   constructor(@Inject(StudentService) private studentService: StudentService) {}
 
-  ngOnInit(): void {
-    this.loadStudents();
+  ngOnInit() {
+    this.studentService.getStudents().subscribe((data: Student[]) => { // Added type annotation
+      this.students = data;
+    });
   }
 
   loadStudents(): void {
-    this.studentService.getStudents().subscribe(data => {
+    this.studentService.getStudents().subscribe((data: Student[]) => {
       this.students = data;
     });
   }
