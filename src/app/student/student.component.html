@@ -1,0 +1,19 @@
+<div class="max-w-xl mx-auto mt-10 p-8 bg-white rounded-xl shadow-lg">
+  <h2 class="text-2xl font-bold mb-6 text-blue-600 text-center">Student List</h2>
+
+  <form (ngSubmit)="addStudent()" class="mb-8 flex flex-col gap-4">
+    <div class="flex gap-4">
+      <input [(ngModel)]="newStudent.name" name="name" placeholder="Name" required class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      <input [(ngModel)]="newStudent.age" name="age" type="number" placeholder="Age" required class="w-24 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      <input [(ngModel)]="newStudent.grade" name="grade" placeholder="Grade" required class="w-32 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <button type="submit" class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">Add Student</button>
+  </form>
+
+  <ul class="divide-y divide-gray-200">
+    <li *ngFor="let s of students" class="py-4 flex items-center justify-between">
+      <span class="text-lg text-gray-700">{{s.name}} <span class="text-sm text-gray-500">({{s.age}} years, Grade: <span class="font-semibold text-blue-500">{{s.grade}}</span>)</span></span>
+  <button (click)="deleteStudent(s.id!)" class="ml-4 px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">Delete</button>
+    </li>
+  </ul>
+</div>
