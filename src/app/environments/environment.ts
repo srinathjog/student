@@ -1,3 +1,3 @@
 export const environment = {
-  apiBaseUrl: 'https://school-op80.onrender.com'
+  apiBaseUrl: 'https://school-op80.onrender.com/api'
 };
