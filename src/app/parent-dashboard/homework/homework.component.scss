@@ -1,0 +1,660 @@
+/* Homework & Assignments Styles */
+.homework-container {
+  padding: 2rem;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* Header Section */
+.homework-header {
+  margin-bottom: 2rem;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.title-section {
+  flex: 1;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-subtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Stats Overview */
+.stats-overview {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 100px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-card.pending {
+  border-left: 4px solid #f59e0b;
+  background: linear-gradient(135deg, #fff7ed, #ffffff);
+}
+
+.stat-card.completed {
+  border-left: 4px solid #10b981;
+  background: linear-gradient(135deg, #ecfdf5, #ffffff);
+}
+
+.stat-card.overdue {
+  border-left: 4px solid #ef4444;
+  background: linear-gradient(135deg, #fef2f2, #ffffff);
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* Tab Navigation */
+.homework-tabs {
+  margin-bottom: 2rem;
+}
+
+.tab-nav {
+  display: flex;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.tab-button:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.tab-button.active {
+  background: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.tab-icon {
+  font-size: 1.2rem;
+}
+
+.tab-label {
+  font-size: 0.95rem;
+}
+
+.tab-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: inherit;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tab-button.active .tab-count {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tab Content */
+.tab-content {
+  min-height: 500px;
+}
+
+.panel-header {
+  margin-bottom: 2rem;
+}
+
+.panel-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.panel-description {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Assignment Grid */
+.assignment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Assignment Cards */
+.assignment-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.assignment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.assignment-card.priority-high {
+  border-left: 6px solid #ef4444;
+}
+
+.assignment-card.priority-medium {
+  border-left: 6px solid #f59e0b;
+}
+
+.assignment-card.priority-low {
+  border-left: 6px solid #10b981;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.subject-badge {
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.subject-badge.completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.subject-badge.overdue {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.subject-badge.upcoming {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.priority-indicator {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.priority-indicator.priority-high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.priority-indicator.priority-medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.priority-indicator.priority-low {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.card-content {
+  margin-bottom: 1.5rem;
+}
+
+.assignment-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.assignment-description {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.assignment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.detail-icon {
+  font-size: 1rem;
+}
+
+.card-footer {
+  border-top: 1px solid #f3f4f6;
+  padding-top: 1rem;
+}
+
+.due-info {
+  margin-bottom: 1rem;
+}
+
+.due-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.due-label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.due-value {
+  color: #6b7280;
+}
+
+.days-remaining {
+  font-size: 0.9rem;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.days-remaining.urgent {
+  color: #ef4444;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-view, .btn-submit, .btn-contact, .btn-submit-late {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-view {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.btn-view:hover {
+  background: #e5e7eb;
+}
+
+.btn-submit {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-submit:hover {
+  background: #2563eb;
+}
+
+.btn-contact {
+  background: #f59e0b;
+  color: white;
+}
+
+.btn-contact:hover {
+  background: #d97706;
+}
+
+.btn-submit-late {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-submit-late:hover {
+  background: #dc2626;
+}
+
+/* Completed Assignments */
+.completed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.completed-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.completed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.assignment-info {
+  flex: 1;
+}
+
+.grade-display {
+  display: flex;
+  align-items: center;
+}
+
+.grade {
+  background: #10b981;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  min-width: 60px;
+  text-align: center;
+}
+
+.completed-content {
+  margin-bottom: 1rem;
+}
+
+.submission-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.feedback-section {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 1rem;
+  border-left: 4px solid #3b82f6;
+}
+
+.feedback-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.feedback-text {
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Overdue Assignments */
+.overdue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.overdue-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #fecaca;
+  border-left: 6px solid #ef4444;
+}
+
+.overdue-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.overdue-content {
+  margin-bottom: 1.5rem;
+}
+
+.overdue-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.overdue-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Upcoming Timeline */
+.upcoming-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.upcoming-timeline::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e5e7eb;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -2.25rem;
+  top: 1.5rem;
+  width: 12px;
+  height: 12px;
+  background: #3b82f6;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 2px #e5e7eb;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.due-date-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.timeline-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .assignment-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .stats-overview {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .homework-container {
+    padding: 1rem;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .tab-nav {
+    flex-wrap: wrap;
+  }
+  
+  .assignment-card {
+    padding: 1rem;
+  }
+  
+  .card-actions {
+    flex-direction: column;
+  }
+  
+  .btn-view, .btn-submit, .btn-contact, .btn-submit-late {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .completed-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .submission-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .overdue-actions {
+    flex-direction: column;
+  }
+  
+  .upcoming-timeline {
+    padding-left: 1rem;
+  }
+  
+  .timeline-marker {
+    left: -1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-overview {
+    flex-direction: column;
+  }
+  
+  .stat-card {
+    width: 100%;
+  }
+  
+  .tab-button {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

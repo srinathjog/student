@@ -1,12 +1,18 @@
-import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideServerRendering, withRoutes } from '@angular/ssr';
-import { appConfig } from './app.config';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { ngrxProvidersServer } from './ngrx.config.server';
 import { serverRoutes } from './app.routes.server';
+import { routes } from './app.routes';
 
-const serverConfig: ApplicationConfig = {
+// Server-only configuration - no effects, no client hydration
+export const config: ApplicationConfig = {
   providers: [
-    provideServerRendering(withRoutes(serverRoutes))
+    provideHttpClient(withFetch()),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideServerRendering(withRoutes(serverRoutes)),
+    ...ngrxProvidersServer, // Only store, no effects
   ]
 };
-
-export const config = mergeApplicationConfig(appConfig, serverConfig);

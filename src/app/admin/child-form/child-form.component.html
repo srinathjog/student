@@ -1,0 +1,30 @@
+<div class="child-form-container">
+  <form [formGroup]="childForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Child Name</label>
+      <input id="name" formControlName="name" type="text" />
+  <div *ngIf="submitted && childForm.controls['name'].errors" class="error">Name is required.</div>
+    </div>
+    <div>
+      <label for="age">Age</label>
+      <input id="age" formControlName="age" type="number" min="1" />
+  <div *ngIf="submitted && childForm.controls['age'].errors" class="error">Valid age is required.</div>
+    </div>
+    <div>
+      <label for="class">Class</label>
+      <input id="class" formControlName="class" type="text" />
+  <div *ngIf="submitted && childForm.controls['class'].errors" class="error">Class is required.</div>
+    </div>
+    <div>
+      <label for="parentName">Parent Name</label>
+      <input id="parentName" formControlName="parentName" type="text" />
+  <div *ngIf="submitted && childForm.controls['parentName'].errors" class="error">Parent name is required.</div>
+    </div>
+    <div>
+      <label for="parentContact">Parent Contact</label>
+      <input id="parentContact" formControlName="parentContact" type="text" />
+  <div *ngIf="submitted && childForm.controls['parentContact'].errors" class="error">Parent contact is required.</div>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>

@@ -12,6 +12,12 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    "src/**/*.spec.ts"
+    "src/**/*.spec.ts",
+    "backend*.js",
+    "mongodb*.js",
+    "setup*.js",
+    "updated*.js",
+    "middleware/**/*.js",
+    "*.js"
   ]
 }

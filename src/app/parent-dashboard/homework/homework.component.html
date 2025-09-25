@@ -1,0 +1,218 @@
+<div class="homework-container">
+  <!-- Header Section -->
+  <div class="homework-header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1 class="page-title">📚 Homework & Assignments</h1>
+        <p class="page-subtitle">Track your academic progress and stay on top of your assignments</p>
+      </div>
+      <div class="stats-overview">
+        <div class="stat-card pending">
+          <div class="stat-number">{{ pendingHomework.length }}</div>
+          <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card completed">
+          <div class="stat-number">{{ completedHomework.length }}</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card overdue">
+          <div class="stat-number">{{ overdueHomework.length }}</div>
+          <div class="stat-label">Overdue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="homework-tabs">
+    <div class="tab-nav">
+      <button 
+        *ngFor="let tab of homeworkTabs" 
+        class="tab-button"
+        [class.active]="activeTab === tab.id"
+        (click)="switchTab(tab.id)">
+        <span class="tab-icon">{{ tab.icon }}</span>
+        <span class="tab-label">{{ tab.label }}</span>
+        <span class="tab-count">{{ tab.count }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    
+    <!-- Pending Assignments -->
+    <div class="tab-panel" *ngIf="activeTab === 'pending'">
+      <div class="panel-header">
+        <h2 class="panel-title">Pending Assignments</h2>
+        <p class="panel-description">Complete these assignments before their due dates</p>
+      </div>
+      
+      <div class="assignment-grid">
+        <div class="assignment-card" *ngFor="let assignment of pendingHomework" [class]="getPriorityClass(assignment.priority)">
+          <div class="card-header">
+            <div class="subject-badge">{{ assignment.subject }}</div>
+            <div class="priority-indicator" [class]="getPriorityClass(assignment.priority)">
+              {{ assignment.priority | titlecase }}
+            </div>
+          </div>
+          
+          <div class="card-content">
+            <h3 class="assignment-title">{{ assignment.title }}</h3>
+            <p class="assignment-description">{{ assignment.description }}</p>
+            
+            <div class="assignment-details">
+              <div class="detail-item">
+                <span class="detail-icon">👨‍🏫</span>
+                <span class="detail-text">{{ assignment.teacher }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">⏱️</span>
+                <span class="detail-text">{{ assignment.estimatedTime }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">{{ getSubmissionTypeIcon(assignment.submissionType) }}</span>
+                <span class="detail-text">{{ assignment.submissionType | titlecase }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-footer">
+            <div class="due-info">
+              <div class="due-date">
+                <span class="due-label">Due:</span>
+                <span class="due-value">{{ assignment.dueDate | date:'MMM dd, yyyy' }} at {{ assignment.dueTime }}</span>
+              </div>
+              <div class="days-remaining" [class.urgent]="getDaysUntilDue(assignment.dueDate) <= 1">
+                {{ getDaysUntilDue(assignment.dueDate) }} days remaining
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <button class="btn-view" *ngIf="assignment.attachments?.length">
+                📎 Attachments ({{ assignment.attachments.length }})
+              </button>
+              <button class="btn-submit">Submit Assignment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completed Assignments -->
+    <div class="tab-panel" *ngIf="activeTab === 'completed'">
+      <div class="panel-header">
+        <h2 class="panel-title">Completed Assignments</h2>
+        <p class="panel-description">Review your submitted work and grades</p>
+      </div>
+      
+      <div class="completed-list">
+        <div class="completed-item" *ngFor="let assignment of completedHomework">
+          <div class="completed-header">
+            <div class="assignment-info">
+              <div class="subject-badge completed">{{ assignment.subject }}</div>
+              <h3 class="assignment-title">{{ assignment.title }}</h3>
+            </div>
+            <div class="grade-display">
+              <div class="grade">{{ assignment.grade }}</div>
+            </div>
+          </div>
+          
+          <div class="completed-content">
+            <p class="assignment-description">{{ assignment.description }}</p>
+            <div class="submission-info">
+              <span class="submitted-date">Submitted: {{ assignment.submittedDate | date:'MMM dd, yyyy' }}</span>
+              <span class="teacher-name">{{ assignment.teacher }}</span>
+            </div>
+          </div>
+          
+          <div class="feedback-section" *ngIf="assignment.feedback">
+            <div class="feedback-header">
+              <span class="feedback-icon">💬</span>
+              <span class="feedback-label">Teacher Feedback</span>
+            </div>
+            <p class="feedback-text">{{ assignment.feedback }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overdue Assignments -->
+    <div class="tab-panel" *ngIf="activeTab === 'overdue'">
+      <div class="panel-header">
+        <h2 class="panel-title">Overdue Assignments</h2>
+        <p class="panel-description">These assignments require immediate attention</p>
+      </div>
+      
+      <div class="overdue-list">
+        <div class="overdue-item" *ngFor="let assignment of overdueHomework">
+          <div class="overdue-warning">
+            <span class="warning-icon">🚨</span>
+            <span class="overdue-text">{{ assignment.daysOverdue }} day(s) overdue</span>
+          </div>
+          
+          <div class="overdue-content">
+            <div class="subject-badge overdue">{{ assignment.subject }}</div>
+            <h3 class="assignment-title">{{ assignment.title }}</h3>
+            <p class="assignment-description">{{ assignment.description }}</p>
+            
+            <div class="overdue-details">
+              <div class="detail-item">
+                <span class="detail-icon">👨‍🏫</span>
+                <span class="detail-text">{{ assignment.teacher }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">📅</span>
+                <span class="detail-text">Originally due: {{ assignment.dueDate | date:'MMM dd, yyyy' }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="overdue-actions">
+            <button class="btn-contact">Contact Teacher</button>
+            <button class="btn-submit-late">Submit Late</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upcoming Assignments -->
+    <div class="tab-panel" *ngIf="activeTab === 'upcoming'">
+      <div class="panel-header">
+        <h2 class="panel-title">Upcoming Assignments</h2>
+        <p class="panel-description">Plan ahead for future assignments</p>
+      </div>
+      
+      <div class="upcoming-timeline">
+        <div class="timeline-item" *ngFor="let assignment of upcomingHomework">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div class="subject-badge upcoming">{{ assignment.subject }}</div>
+              <div class="due-date-badge">{{ assignment.dueDate | date:'MMM dd' }}</div>
+            </div>
+            
+            <h3 class="assignment-title">{{ assignment.title }}</h3>
+            <p class="assignment-description">{{ assignment.description }}</p>
+            
+            <div class="timeline-details">
+              <div class="detail-item">
+                <span class="detail-icon">👨‍🏫</span>
+                <span class="detail-text">{{ assignment.teacher }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">⏱️</span>
+                <span class="detail-text">Est. {{ assignment.estimatedTime }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">📅</span>
+                <span class="detail-text">{{ getDaysUntilDue(assignment.dueDate) }} days from now</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

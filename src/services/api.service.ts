@@ -13,7 +13,7 @@ export interface Student {
   providedIn: 'root'
 })
 export class StudentService {
-  private baseUrl = 'http://localhost:5000/api/students';
+  private baseUrl = 'http://localhost:5001/api/students';
 
   constructor(private http: HttpClient) {}
 

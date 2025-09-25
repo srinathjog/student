@@ -1,0 +1,57 @@
+<div class="students-page">
+  <div class="students-header">
+    <h2>Students</h2>
+    <button class="add-btn" (click)="openAddModal()">+ Add Student</button>
+  </div>
+  <table class="students-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Class</th>
+        <th>Parent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.name }}</td>
+        <td>{{ student.age }}</td>
+        <td>{{ student.class }}</td>
+        <td>{{ student.parent }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="modal-backdrop" *ngIf="showAddModal" (click)="closeAddModal()"></div>
+  <div class="add-modal" *ngIf="showAddModal">
+    <div class="modal-header">
+      <h3>Add Student</h3>
+      <button class="close-btn" (click)="closeAddModal()" title="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addStudentForm" (ngSubmit)="submitAddStudent()" class="two-col-form">
+        <div class="form-col">
+          <div class="form-row"><label>Name</label><input formControlName="name" type="text" /></div>
+          <div class="form-row"><label>Age</label><input formControlName="age" type="number" min="1" /></div>
+          <div class="form-row"><label>Class</label><input formControlName="class" type="text" /></div>
+          <div class="form-row"><label>Date of Birth</label><input formControlName="dob" type="date" /></div>
+          <div class="form-row"><label>Roll Number</label><input formControlName="rollNumber" type="text" /></div>
+          <div class="form-row"><label>Class Teacher</label><input formControlName="classTeacher" type="text" /></div>
+        </div>
+        <div class="form-col">
+          <div class="form-row"><label>Date of Admission</label><input formControlName="dateOfAdmission" type="date" /></div>
+          <div class="form-row"><label>User ID</label><input formControlName="userId" type="text" /></div>
+          <div class="form-row"><label>Category</label><input formControlName="category" type="text" /></div>
+          <div class="form-row"><label>School Mail ID</label><input formControlName="schoolMailId" type="email" /></div>
+          <div class="form-row"><label>Adhaar Number</label><input formControlName="adhaarNumber" type="text" maxlength="12" /></div>
+          <div class="form-row"><label>Profile Image</label><input type="file" (change)="onFileChange($event)" /></div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <div class="form-actions">
+        <button type="submit" [disabled]="addStudentForm.invalid" (click)="submitAddStudent()">Add</button>
+        <button type="button" (click)="closeAddModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

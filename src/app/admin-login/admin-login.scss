@@ -1,0 +1,63 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+}
+
+form {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 41, 55, 0.2);
+  width: 100%;
+  max-width: 600px; /* Increased from 400px to 600px */
+}
+
+h2 {
+  color: #3b82f6;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+input[type="text"],
+input[type="password"] {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+  font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+button[type="submit"] {
+  background: linear-gradient(90deg, #3b82f6 0%, #6366f1 100%);
+  color: #fff;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(90deg, #2563eb 0%, #4f46e5 100%);
+}
+
+.text-red-500 {
+  color: #ef4444;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 1rem;
+}

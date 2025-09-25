@@ -1,0 +1,30 @@
+<div class="admin-dashboard-layout">
+  <header class="admin-navbar">
+    <div class="admin-navbar-title">Admin Dashboard</div>
+    <div class="admin-navbar-user">
+      <div class="user-icon" tabindex="0" (click)="showDropdown = !showDropdown" (blur)="showDropdown = false">
+        <svg width="28" height="28" fill="currentColor" viewBox="0 0 20 20"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/></svg>
+      </div>
+      <div class="user-dropdown" *ngIf="showDropdown">
+        <div class="user-name">{{ adminUsername || 'Admin' }}</div>
+        <button (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+  <div class="admin-main">
+    <aside class="admin-sidebar">
+      <nav>
+  <a routerLink="students" routerLinkActive="active">Students</a>
+      </nav>
+    </aside>
+    <main class="admin-content">
+      <router-outlet></router-outlet>
+      <ng-container *ngIf="!router.url.endsWith('/students')">
+        <div class="admin-greeting">
+          <h2>Welcome to the Admin Dashboard!</h2>
+          <p>Use the sidebar to manage students and view information.</p>
+        </div>
+      </ng-container>
+    </main>
+  </div>
+</div>

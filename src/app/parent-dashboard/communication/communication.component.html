@@ -1,0 +1,208 @@
+<div class="communication-container">
+  <div class="communication-header">
+    <h1 class="page-title">Communication</h1>
+    <p class="page-subtitle">Stay connected with school updates and messages</p>
+  </div>
+
+  <!-- Communication Tabs -->
+  <div class="communication-tabs">
+    <div class="tab-nav">
+      <button 
+        *ngFor="let tab of communicationTabs" 
+        class="tab-button"
+        [class.active]="activeTab === tab.id"
+        (click)="setActiveTab(tab.id)">
+        <span class="tab-icon">{{tab.icon}}</span>
+        <span class="tab-label">{{tab.label}}</span>
+      </button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+      
+      <!-- Circular/News Tab -->
+      <div *ngIf="activeTab === 'circular'" class="tab-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">School Circulars & News</h2>
+        </div>
+        <div class="circular-list">
+          <div *ngFor="let circular of circulars" 
+               class="circular-item"
+               [class.unread]="!circular.isRead"
+               [class.high-priority]="circular.priority === 'high'">
+            <div class="circular-header">
+              <div class="circular-title-section">
+                <h3 class="circular-title">{{circular.title}}</h3>
+                <span class="priority-badge" [class]="circular.priority">{{circular.priority}}</span>
+              </div>
+              <div class="circular-meta">
+                <span class="circular-date">{{circular.date}}</span>
+                <span *ngIf="!circular.isRead" class="unread-indicator">New</span>
+              </div>
+            </div>
+            <div class="circular-content">
+              {{circular.content}}
+            </div>
+            <div class="circular-actions">
+              <button *ngIf="!circular.isRead" 
+                      class="btn-mark-read" 
+                      (click)="markAsRead('circular', circular.id)">
+                Mark as Read
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mailbox Tab -->
+      <div *ngIf="activeTab === 'mailbox'" class="tab-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Mailbox</h2>
+        </div>
+        <div class="mailbox-list">
+          <div *ngFor="let message of mailboxMessages" 
+               class="mail-item"
+               [class.unread]="!message.isRead">
+            <div class="mail-header">
+              <div class="mail-from">
+                <span class="sender-name">{{message.from}}</span>
+                <span *ngIf="message.attachment" class="attachment-icon">📎</span>
+              </div>
+              <span class="mail-date">{{message.date}}</span>
+            </div>
+            <div class="mail-subject">{{message.subject}}</div>
+            <div class="mail-content">{{message.content}}</div>
+            <div class="mail-actions">
+              <button class="btn-reply">Reply</button>
+              <button *ngIf="!message.isRead" 
+                      class="btn-mark-read" 
+                      (click)="markAsRead('mailbox', message.id)">
+                Mark as Read
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SMS History Tab -->
+      <div *ngIf="activeTab === 'sms'" class="tab-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">SMS History</h2>
+        </div>
+        <div class="sms-list">
+          <div *ngFor="let sms of smsHistory" class="sms-item" [class]="sms.type">
+            <div class="sms-content">
+              <div class="sms-message">{{sms.message}}</div>
+              <div class="sms-meta">
+                <span class="sms-date">{{sms.date}}</span>
+                <span class="sms-time">{{sms.time}}</span>
+                <span class="sms-type">{{sms.type}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievement Tab -->
+      <div *ngIf="activeTab === 'achievement'" class="tab-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Achievements</h2>
+        </div>
+        <div class="achievement-grid">
+          <div *ngFor="let achievement of achievements" class="achievement-card">
+            <div class="achievement-header">
+              <h3 class="achievement-title">{{achievement.title}}</h3>
+              <span class="achievement-category">{{achievement.category}}</span>
+            </div>
+            <div class="achievement-description">{{achievement.description}}</div>
+            <div class="achievement-footer">
+              <span class="achievement-date">{{achievement.date}}</span>
+              <span *ngIf="achievement.certificate" class="certificate-badge">🏅 Certificate Available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PTM Tab -->
+      <div *ngIf="activeTab === 'ptm'" class="tab-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Parent-Teacher Meetings</h2>
+        </div>
+        <div class="ptm-list">
+          <div *ngFor="let ptm of ptmSchedules" class="ptm-item" [class]="ptm.status">
+            <div class="ptm-header">
+              <div class="ptm-teacher-info">
+                <h3 class="teacher-name">{{ptm.teacher}}</h3>
+                <span class="subject-name">{{ptm.subject}}</span>
+              </div>
+              <span class="ptm-status" [class]="ptm.status">{{ptm.status}}</span>
+            </div>
+            <div class="ptm-details">
+              <div class="ptm-datetime">
+                <span class="ptm-date">📅 {{ptm.date}}</span>
+                <span class="ptm-time">🕐 {{ptm.time}}</span>
+              </div>
+              <span class="ptm-mode" [class]="ptm.mode">{{ptm.mode}}</span>
+            </div>
+            <div class="ptm-actions">
+              <button *ngIf="ptm.status === 'scheduled'" 
+                      class="btn-confirm" 
+                      (click)="confirmPTM(ptm.id)">
+                Confirm Attendance
+              </button>
+              <button class="btn-reschedule">Reschedule</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Remarks Tab -->
+      <div *ngIf="activeTab === 'remarks'" class="tab-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Teacher Remarks</h2>
+        </div>
+        <div class="remarks-list">
+          <div *ngFor="let remark of remarks" class="remark-item" [class]="remark.type">
+            <div class="remark-header">
+              <div class="teacher-subject">
+                <span class="teacher-name">{{remark.teacher}}</span>
+                <span class="subject-badge">{{remark.subject}}</span>
+              </div>
+              <span class="remark-date">{{remark.date}}</span>
+            </div>
+            <div class="remark-content">{{remark.remark}}</div>
+            <div class="remark-type-badge" [class]="remark.type">
+              {{remark.type === 'positive' ? '👍 Positive' : '📝 Improvement'}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other Reports Tab -->
+      <div *ngIf="activeTab === 'reports'" class="tab-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Other Reports</h2>
+        </div>
+        <div class="reports-list">
+          <div *ngFor="let report of otherReports" class="report-item">
+            <div class="report-icon">📄</div>
+            <div class="report-details">
+              <h3 class="report-title">{{report.title}}</h3>
+              <div class="report-meta">
+                <span class="report-type">{{report.type}}</span>
+                <span class="report-date">{{report.date}}</span>
+                <span class="report-size">{{report.size}}</span>
+              </div>
+            </div>
+            <div class="report-actions">
+              <button class="btn-download" (click)="downloadReport(report.downloadUrl)">
+                ⬇️ Download
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

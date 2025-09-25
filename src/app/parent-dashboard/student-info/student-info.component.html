@@ -1,0 +1,26 @@
+<div *ngIf="student" class="student-info-card flex flex-col md:flex-row items-center gap-6">
+  <div class="flex-shrink-0">
+    <img *ngIf="student.profileImage" [src]="student.profileImage" alt="Profile" class="w-32 h-32 rounded-full object-cover border-2 border-blue-500 shadow-md mb-4 md:mb-0" />
+    <div *ngIf="!student.profileImage" class="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center text-4xl text-gray-400 border-2 border-gray-300 mb-4 md:mb-0">
+      <span>👤</span>
+    </div>
+  </div>
+  <div class="flex-1">
+    <h2 class="text-2xl font-bold mb-2 text-blue-900">{{ student.name }}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+      <div><span class="font-semibold">Age:</span> {{ student.age }}</div>
+      <div><span class="font-semibold">Class:</span> {{ student.class }}</div>
+      <div><span class="font-semibold">Date of Birth:</span> {{ student.dob | date:'longDate' }}</div>
+      <div><span class="font-semibold">Roll Number:</span> {{ student.rollNumber }}</div>
+      <div><span class="font-semibold">Class Teacher:</span> {{ student.classTeacher }}</div>
+      <div><span class="font-semibold">Date of Admission:</span> {{ student.dateOfAdmission | date:'longDate' }}</div>
+      <div><span class="font-semibold">User ID:</span> {{ student.userId }}</div>
+      <div><span class="font-semibold">Category:</span> {{ student.category }}</div>
+      <div><span class="font-semibold">School Mail ID:</span> {{ student.schoolMailId }}</div>
+      <div><span class="font-semibold">Aadhaar Number:</span> {{ student.adhaarNumber }}</div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!student">
+  <p>No student information available.</p>
+</div>

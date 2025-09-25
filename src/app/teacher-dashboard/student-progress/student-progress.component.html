@@ -1,0 +1,100 @@
+<div class="student-progress-container">
+  <div class="header">
+    <h2>Student Progress Tracker</h2>
+    <div class="stats">
+      <div class="stat-card">
+        <span class="label">Total Students</span>
+        <span class="value">{{getTotalStudents()}}</span>
+      </div>
+      <div class="stat-card">
+        <span class="label">Average GPA</span>
+        <span class="value">{{getAverageGPA()}}</span>
+      </div>
+      <div class="stat-card">
+        <span class="label">Average Attendance</span>
+        <span class="value">{{getAverageAttendance()}}%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="search-filter">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        (input)="filterStudents()"
+        placeholder="Search students..." 
+        class="search-input">
+    </div>
+    
+    <div class="class-tabs">
+      <button 
+        [class.active]="selectedClass === 'all'"
+        (click)="selectClass('all')"
+        class="tab-btn">
+        All Students ({{students.length}})
+      </button>
+      <button 
+        *ngFor="let className of getUniqueClasses()"
+        [class.active]="selectedClass === className"
+        (click)="selectClass(className)"
+        class="tab-btn">
+        {{className}} ({{getStudentsByClass(className).length}})
+      </button>
+    </div>
+  </div>
+
+  <div class="student-list">
+    <div class="list-header">
+      <span>Showing {{getStartIndex() + 1}}-{{getEndIndex()}} of {{filteredStudents.length}} students</span>
+    </div>
+    
+    <div class="students-grid">
+      <div 
+        *ngFor="let student of getPaginatedStudents()" 
+        class="student-card">
+        <div class="student-info">
+          <h4>{{student.name}}</h4>
+          <p class="roll-number">{{student.rollNumber}}</p>
+          <p class="class-name">{{student.class}}</p>
+        </div>
+        <div class="student-metrics">
+          <div class="metric">
+            <span class="metric-label">GPA</span>
+            <span class="metric-value" [class]="student.gpa >= 3.5 ? 'good' : student.gpa >= 3.0 ? 'average' : 'needs-improvement'">
+              {{student.gpa}}
+            </span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Attendance</span>
+            <span class="metric-value" [class]="student.attendance >= 90 ? 'good' : student.attendance >= 80 ? 'average' : 'needs-improvement'">
+              {{student.attendance}}%
+            </span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Recent Grade</span>
+            <span class="metric-value grade">{{student.recentGrade}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination" *ngIf="getTotalPages() > 1">
+      <button 
+        (click)="previousPage()" 
+        [disabled]="currentPage === 1"
+        class="page-btn">
+        Previous
+      </button>
+      <span class="page-info">
+        Page {{currentPage}} of {{getTotalPages()}}
+      </span>
+      <button 
+        (click)="nextPage()" 
+        [disabled]="currentPage === getTotalPages()"
+        class="page-btn">
+        Next
+      </button>
+    </div>
+  </div>
+</div>

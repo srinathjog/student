@@ -1,0 +1,138 @@
+<div class="parent-dashboard-container">
+	<!-- Fixed Header -->
+	<div class="fixed-header">
+		<div class="header-left">
+			<button class="hamburger-menu" (click)="toggleSidebar()">
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+			</button>
+			<div class="header-logo">
+				<span class="logo-icon">🎓</span>
+				<span class="logo-text">EduPortal</span>
+			</div>
+		</div>
+		<div class="header-user">
+			<span class="user-icon">👤</span>
+			<span class="user-name">{{ parentUsername || 'Parent' }}</span>
+			<button class="logout-btn" (click)="logout()">Logout</button>
+		</div>
+	</div>
+
+	<!-- Sidebar Overlay -->
+	<div class="sidebar-overlay" [class.active]="isSidebarExpanded" (click)="closeSidebar()"></div>
+
+	<!-- Collapsible Sidebar -->
+	<div class="sidebar" [class.expanded]="isSidebarExpanded">
+		<div class="sidebar-header">
+			<div class="logo">
+				<span class="logo-icon">🎓</span>
+				<span class="logo-text">EduPortal</span>
+			</div>
+			<button class="close-sidebar" (click)="closeSidebar()" *ngIf="isSidebarExpanded">
+				×
+			</button>
+		</div>
+		
+		<nav class="sidebar-nav">
+			<ul class="nav-list">
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/overview" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('Dashboard', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">🏠</span>
+						<span class="nav-text">Dashboard</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/communication" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('Communication', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">💬</span>
+						<span class="nav-text">Communication</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/homework" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('Homework & Assignments', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">📚</span>
+						<span class="nav-text">Homework & Assignments</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/digital-learning" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('Digital Learning', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">💻</span>
+						<span class="nav-text">Digital Learning</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/fees" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('Fees', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">💳</span>
+						<span class="nav-text">Fees</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/results" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('Results', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">📊</span>
+						<span class="nav-text">Results</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/school-calendar" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('School Calendar', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">📅</span>
+						<span class="nav-text">School Calendar</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/image-gallery" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('Image Gallery', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">🖼️</span>
+						<span class="nav-text">Image Gallery</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/transport" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('Transport', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">🚌</span>
+						<span class="nav-text">Transport</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a routerLink="/parent-dashboard/requests" routerLinkActive="active" class="nav-link" 
+					   (mouseenter)="showTooltip('Requests', $event)" 
+					   (mouseleave)="hideTooltip()">
+						<span class="nav-icon">📝</span>
+						<span class="nav-text">Requests</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+
+	<!-- Tooltip Element -->
+	<div class="custom-tooltip" 
+		 [class.tooltip-visible]="tooltipVisible"
+		 [style.left.px]="tooltipX"
+		 [style.top.px]="tooltipY">
+		{{ tooltipText }}
+	</div>
+
+	<!-- Main Content Area -->
+	<div class="main-content">
+		<!-- Router Outlet for Child Components -->
+		<div class="content-area">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</div>
